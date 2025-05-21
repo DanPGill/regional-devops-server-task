@@ -11,6 +11,7 @@ It implements the following:
 - Express JS
 - ShadCN for UI components
 - Tailwindcss for styling
+- Docker and flyctl for deployment
 
 # Instructions
 
