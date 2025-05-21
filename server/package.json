@@ -4,16 +4,22 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "dev": "node --loader ts-node/esm index.ts"
+    "build": "tsc",
+    "start": "node --loader ts-node/esm index.ts",
+    "launch": "flyctl launch",
+    "deploy": "flyctl deploy"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.6.1",
   "dependencies": {
+    "@types/ws": "^8.18.1",
     "express": "^5.1.0",
+    "node-fetch": "^3.3.2",
     "vite": "^6.3.5",
-    "vite-express": "^0.21.1"
+    "vite-express": "^0.21.1",
+    "ws": "^8.18.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.2",
