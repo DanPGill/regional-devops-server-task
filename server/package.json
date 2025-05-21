@@ -1,0 +1,24 @@
+{
+  "name": "regional-devops-server",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "node --loader ts-node/esm index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.6.1",
+  "dependencies": {
+    "express": "^5.1.0",
+    "vite": "^6.3.5",
+    "vite-express": "^0.21.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.15.20",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
