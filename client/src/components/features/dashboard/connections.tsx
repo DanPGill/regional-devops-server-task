@@ -6,9 +6,7 @@ type ConnectionsProps = {
   data: RegionStatus[];
 };
 
-const Connections: React.FC<ConnectionsProps> = ({
-  data,
-}) => {
+const Connections: React.FC<ConnectionsProps> = ({ data }) => {
   const totalConnections = data
     .filter(
       (

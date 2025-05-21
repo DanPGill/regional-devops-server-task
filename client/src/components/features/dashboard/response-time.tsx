@@ -6,9 +6,7 @@ type ResponseTimeProps = {
   data: RegionStatus[];
 };
 
-const ResponseTime: React.FC<ResponseTimeProps> = ({
-  data,
-}) => {
+const ResponseTime: React.FC<ResponseTimeProps> = ({ data }) => {
   const aboveThreshold = data.some(
     (r) =>
       typeof r.stats?.server?.wait_time === "number" &&
