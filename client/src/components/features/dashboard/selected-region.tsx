@@ -83,6 +83,8 @@ const SelectedRegion: React.FC<SelectRegionProps> = ({
     </div>
   );
 
+  const cpuLoad = selectedRegionData?.stats?.server?.cpu_load ?? 0;
+
   const metricsContent = (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <Card>
@@ -98,10 +100,15 @@ const SelectedRegion: React.FC<SelectRegionProps> = ({
               Current Usage
             </div>
             <span className="font-medium text-gray-900">
-              {selectedRegionData?.stats?.server?.cpu_load ?? "N/A"}%
+              {cpuLoad ?? "N/A"}%
             </span>
           </div>
-          <div className="w-full h-2 bg-gray-200 rounded-full" />
+          <div className="w-full h-2 bg-gray-200 rounded-full">
+            <div
+              className="h-2 rounded-full bg-blue-500 transition-all"
+              style={{ width: `${Math.min(cpuLoad, 100)}%` }}
+            />
+          </div>
           <div className="grid grid-cols-3 text-xs text-muted-foreground">
             <div>Low</div>
             <div className="text-center">Medium</div>
