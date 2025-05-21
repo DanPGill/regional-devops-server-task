@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, AlertTriangle, XCircle } from "lucide-react";
+import { CheckCircle, AlertTriangle } from "lucide-react";
 import { RegionStatus } from "./dashboard";
 
 type OverallStatusCardProps = {
