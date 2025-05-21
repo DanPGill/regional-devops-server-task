@@ -1,12 +1,65 @@
-import express, { Request, Response } from "express";
-import ViteExpress from "vite-express";
+import WebSocket, { WebSocketServer } from "ws";
+import fetch from "node-fetch";
 
-const app = express();
+const PORT = 8080;
+const INTERVAL = 10000;
 
-app.get("/api/hello", (req: Request, res: Response) => {
-  res.json({ message: "Hello from Express!" });
+const regions = [
+  "us-east",
+  "eu-west",
+  "eu-central",
+  "us-west",
+  "sa-east",
+  "ap-southeast",
+];
+
+const getEndpointUrl = (region: string) =>
+  `https://data--${region}.upscope.io/status?stats=1`;
+
+const wss = new WebSocketServer({ port: PORT });
+const clients = new Set<WebSocket>();
+
+console.log(`WebSocket server started on ws://localhost:${PORT}`);
+
+wss.on("connection", (ws) => {
+  clients.add(ws);
+  console.log("Client connected");
+
+  ws.on("close", () => {
+    clients.delete(ws);
+    console.log("Client disconnected");
+  });
 });
 
-ViteExpress.listen(app, 3000, () => {
-  console.log("Server is listening on port 3000...");
-});
+const fetchRegionData = async () => {
+  const results: Record<string, any> = {};
+
+  await Promise.all(
+    regions.map(async (region) => {
+      try {
+        const response = await fetch(getEndpointUrl(region));
+        const data = await response.json();
+        results[region] = data;
+      } catch (error) {
+        console.error(`Failed to fetch ${region}:`, error);
+        results[region] = { error: "Failed to fetch data" };
+      }
+    })
+  );
+
+  return results;
+};
+
+const updateClientsWithStatusData = async () => {
+  const data = await fetchRegionData();
+
+  const message = JSON.stringify({ timestamp: Date.now(), data });
+
+  for (const client of clients) {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(message);
+    }
+  }
+};
+
+setInterval(updateClientsWithStatusData, INTERVAL);
