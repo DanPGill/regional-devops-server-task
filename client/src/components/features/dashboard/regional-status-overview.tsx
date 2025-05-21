@@ -1,7 +1,7 @@
-import { Card, CardHeader, CardTitle } from "../ui/card";
 import { RegionStatus } from "./dashboard";
 import { Cpu, Users, Wifi } from "lucide-react";
 import { getStatusColor } from "@/lib/utils";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 type RegionalStatusOverviewProps = {
   data: RegionStatus[];

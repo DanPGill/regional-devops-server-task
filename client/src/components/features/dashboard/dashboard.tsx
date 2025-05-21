@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import LoadingSpinnerWrapper from "../core/loading-spinner";
+
 import OverallStatusCard from "./overall-status-card";
 import RegionResponsivenessCard from "./region-responsiveness-card";
 import ActiveConnectionsCard from "./active-connections-card";
 import RegionalStatusOverview from "./regional-status-overview";
 import SelectedRegion from "./selected-region";
+import LoadingSpinnerWrapper from "@/components/core/loading-spinner";
+import { EmptyState } from "@/components/empty-state";
 
 export type RegionStatus = {
   status: string;
@@ -90,56 +92,62 @@ const Dashboard = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">
-            DevOps Monitoring Dashboard
-          </h1>
-          <p className="text-gray-500">
-            Real-time status monitoring for all regions
-          </p>
-        </div>
-        <div className="flex items-center gap-4">
-          <button
-            onClick={connectWebSocket}
-            disabled={loading}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
-          >
-            {loading ? "Refreshing..." : "Refresh Data"}
-          </button>
-          <div className="flex items-center gap-2">
-            <span
-              className="inline-block w-3 h-3 rounded-full"
-              style={{ backgroundColor: connected ? "#10b981" : "#ef4444" }}
-            ></span>
-            <span className="text-sm text-gray-600">
-              {connected ? "Connected" : "Disconnected"}
-            </span>
-          </div>
-        </div>
-      </div>
-      <LoadingSpinnerWrapper isLoading={loading}>
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-            <p>{error}</p>
-          </div>
-        )}
-        {!error && (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <OverallStatusCard data={statusData} />
-              <RegionResponsivenessCard data={statusData} />
-              <ActiveConnectionsCard data={statusData} />
+      {!statusData.length && !loading ? (
+        <EmptyState />
+      ) : (
+        <>
+          <div className="flex justify-between items-center mb-6">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">
+                DevOps Monitoring Dashboard
+              </h1>
+              <p className="text-gray-500">
+                Real-time status monitoring for all regions
+              </p>
             </div>
-            <RegionalStatusOverview
-              data={statusData}
-              selectedRegion={selectedRegion}
-              onSelectRegion={setSelectedRegion}
-            />
-            <SelectedRegion selectedRegionData={selectedRegionData} />
-          </>
-        )}
-      </LoadingSpinnerWrapper>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={connectWebSocket}
+                disabled={loading}
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+              >
+                {loading ? "Refreshing..." : "Refresh Data"}
+              </button>
+              <div className="flex items-center gap-2">
+                <span
+                  className="inline-block w-3 h-3 rounded-full"
+                  style={{ backgroundColor: connected ? "#10b981" : "#ef4444" }}
+                ></span>
+                <span className="text-sm text-gray-600">
+                  {connected ? "Connected" : "Disconnected"}
+                </span>
+              </div>
+            </div>
+          </div>
+          <LoadingSpinnerWrapper isLoading={loading}>
+            {error && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                <p>{error}</p>
+              </div>
+            )}
+            {!error && (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                  <OverallStatusCard data={statusData} />
+                  <RegionResponsivenessCard data={statusData} />
+                  <ActiveConnectionsCard data={statusData} />
+                </div>
+                <RegionalStatusOverview
+                  data={statusData}
+                  selectedRegion={selectedRegion}
+                  onSelectRegion={setSelectedRegion}
+                />
+                <SelectedRegion selectedRegionData={selectedRegionData} />
+              </>
+            )}
+          </LoadingSpinnerWrapper>
+        </>
+      )}
     </div>
   );
 };
