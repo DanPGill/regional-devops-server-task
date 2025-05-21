@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "husky",
-    "typecheck": "tsc --project tsconfig.json --noEmit"
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "launch": "flyctl launch",
+    "deploy": "flyctl deploy"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
