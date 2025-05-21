@@ -91,7 +91,7 @@ const Dashboard = () => {
     statusData.find((r) => r.region === selectedRegion) || statusData[0];
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 min-h-screen flex flex-col">
       {!statusData.length && !loading ? (
         <EmptyState />
       ) : (
