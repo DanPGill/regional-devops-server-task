@@ -2,11 +2,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users } from "lucide-react";
 import { RegionStatus } from "./dashboard";
 
-type ActiveConnectionsCardProps = {
+type ConnectionsProps = {
   data: RegionStatus[];
 };
 
-const ActiveConnectionsCard: React.FC<ActiveConnectionsCardProps> = ({
+const Connections: React.FC<ConnectionsProps> = ({
   data,
 }) => {
   const totalConnections = data
@@ -43,4 +43,4 @@ const ActiveConnectionsCard: React.FC<ActiveConnectionsCardProps> = ({
   );
 };
 
-export default ActiveConnectionsCard;
+export default Connections;

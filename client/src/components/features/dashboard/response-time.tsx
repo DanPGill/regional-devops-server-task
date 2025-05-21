@@ -2,11 +2,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, AlertTriangle } from "lucide-react";
 import { RegionStatus } from "./dashboard";
 
-type RegionResponsivenessCardProps = {
+type ResponseTimeProps = {
   data: RegionStatus[];
 };
 
-const RegionResponsivenessCard: React.FC<RegionResponsivenessCardProps> = ({
+const ResponseTime: React.FC<ResponseTimeProps> = ({
   data,
 }) => {
   const aboveThreshold = data.some(
@@ -64,4 +64,4 @@ const RegionResponsivenessCard: React.FC<RegionResponsivenessCardProps> = ({
   );
 };
 
-export default RegionResponsivenessCard;
+export default ResponseTime;

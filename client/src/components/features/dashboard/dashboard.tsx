@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import OverallStatusCard from "./overall-status-card";
-import RegionResponsivenessCard from "./region-responsiveness-card";
-import ActiveConnectionsCard from "./active-connections-card";
-import RegionalStatusOverview from "./regional-status-overview";
+import Status from "./status";
+import ResponesTime from "./response-time";
+import Connections from "./connections";
+import RegionOverview from "./region-overview";
 import SelectedRegion from "./selected-region";
 import LoadingSpinnerWrapper from "@/components/core/loading-spinner";
 import { EmptyState } from "@/components/empty-state";
@@ -133,11 +133,11 @@ const Dashboard = () => {
             {!error && (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                  <OverallStatusCard data={statusData} />
-                  <RegionResponsivenessCard data={statusData} />
-                  <ActiveConnectionsCard data={statusData} />
+                  <Status data={statusData} />
+                  <ResponesTime data={statusData} />
+                  <Connections data={statusData} />
                 </div>
-                <RegionalStatusOverview
+                <RegionOverview
                   data={statusData}
                   selectedRegion={selectedRegion}
                   onSelectRegion={setSelectedRegion}

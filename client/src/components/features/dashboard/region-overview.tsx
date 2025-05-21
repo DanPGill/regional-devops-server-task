@@ -3,13 +3,13 @@ import { Cpu, Users, Wifi } from "lucide-react";
 import { getStatusColor } from "@/lib/utils";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
-type RegionalStatusOverviewProps = {
+type RegionOverviewProps = {
   data: RegionStatus[];
   selectedRegion: string;
   onSelectRegion: (region: string) => void;
 };
 
-const RegionalStatusOverview: React.FC<RegionalStatusOverviewProps> = ({
+const RegionOverview: React.FC<RegionOverviewProps> = ({
   data,
   onSelectRegion,
   selectedRegion,
@@ -105,4 +105,4 @@ const RegionalStatusOverview: React.FC<RegionalStatusOverviewProps> = ({
   );
 };
 
-export default RegionalStatusOverview;
+export default RegionOverview;

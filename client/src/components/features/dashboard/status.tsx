@@ -2,11 +2,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, AlertTriangle } from "lucide-react";
 import { RegionStatus } from "./dashboard";
 
-type OverallStatusCardProps = {
+type StatusProps = {
   data: RegionStatus[];
 };
 
-const StatusCard: React.FC<OverallStatusCardProps> = ({ data }) => {
+const Status: React.FC<StatusProps> = ({ data }) => {
   return (
     <Card className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
       <CardHeader className="mb-2">
@@ -32,4 +32,4 @@ const StatusCard: React.FC<OverallStatusCardProps> = ({ data }) => {
   );
 };
 
-export default StatusCard;
+export default Status;
