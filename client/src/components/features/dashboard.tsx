@@ -19,6 +19,9 @@ export type RegionStatus = {
   };
 };
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+const socket = new WebSocket(`${baseUrl.replace(/^http/, "ws")}/ws`);
+
 const Dashboard = () => {
   const [statusData, setStatusData] = useState<RegionStatus[]>([]);
   const [selectedRegion, setSelectedRegion] = useState<string>("us-east");
@@ -31,8 +34,6 @@ const Dashboard = () => {
     setError(null);
 
     try {
-      const socket = new WebSocket("ws://localhost:8080");
-
       socket.onopen = () => {
         console.log("WebSocket connected");
         setConnected(true);
