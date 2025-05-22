@@ -10,8 +10,8 @@ import { EmptyState } from "@/components/empty-state";
 import { connectWebSocket } from "@/lib/websocket";
 import { RegionStatus } from "@/types/region-status";
 
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
-const socket = new WebSocket(`${baseUrl.replace(/^http/, "ws")}/ws`);
+const baseUrl = import.meta.env.VITE_WS_BASE_URL;
+const socket = new WebSocket(baseUrl);
 
 const Dashboard = () => {
   const [statusData, setStatusData] = useState<RegionStatus[]>([]);
