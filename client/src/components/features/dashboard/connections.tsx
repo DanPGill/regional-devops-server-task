@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { RegionStatus } from "@/types/region-status";
 import { Users } from "lucide-react";
-import { RegionStatus } from "./dashboard";
 
 type ConnectionsProps = {
   data: RegionStatus[];
@@ -8,14 +8,10 @@ type ConnectionsProps = {
 
 const Connections: React.FC<ConnectionsProps> = ({ data }) => {
   const totalConnections = data
-    .filter(
-      (
-        r,
-      ): r is RegionStatus & {
-        stats: { server: { active_connections: number } };
-      } => typeof r.stats?.server?.active_connections === "number",
-    )
-    .reduce((acc, region) => acc + region.stats.server.active_connections, 0)
+    .reduce((acc, region) => {
+      const connections = region.stats?.server?.active_connections;
+      return typeof connections === "number" ? acc + connections : acc;
+    }, 0)
     .toLocaleString();
 
   return (

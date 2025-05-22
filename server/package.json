@@ -5,9 +5,10 @@
   "main": "index.ts",
   "scripts": {
     "build": "tsc",
-    "start": "node --loader ts-node/esm index.ts",
+    "dev": "tsx src/index.ts",
     "launch": "flyctl launch",
-    "deploy": "flyctl deploy"
+    "deploy": "flyctl deploy",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +25,7 @@
   "devDependencies": {
     "@types/express": "^5.0.2",
     "@types/node": "^22.15.20",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   }
 }

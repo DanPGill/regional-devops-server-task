@@ -8,10 +8,21 @@ export function cn(...inputs: ClassValue[]) {
 export const getStatusColor = (status: string) => {
   switch (status) {
     case "ok":
-      return "#10b981";
+      return "var(--success)";
     case "degraded":
-      return "#f59e0b";
+      return "var(--warning)";
     default:
-      return "#6b7280";
+      return "var(--muted-foreground)";
+  }
+};
+
+export const getStatusBgColor = (status: string) => {
+  switch (status) {
+    case "ok":
+      return "var(--success-background)";
+    case "degraded":
+      return "var(--warning-background)";
+    default:
+      return "var(--muted)";
   }
 };

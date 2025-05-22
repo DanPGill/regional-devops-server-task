@@ -2,7 +2,7 @@ import { Tabs } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getStatusColor } from "@/lib/utils";
 import { BarChartIcon, ActivityIcon, SignalIcon } from "lucide-react";
-import { RegionStatus } from "./dashboard";
+import { RegionStatus } from "@/types/region-status";
 
 type SelectRegionProps = {
   selectedRegionData: RegionStatus;
