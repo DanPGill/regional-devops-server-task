@@ -1,6 +1,19 @@
 import WebSocket, { WebSocketServer } from "ws";
 import fetch from "node-fetch";
 
+type RegionStatus = {
+  status: string;
+  region: string;
+  timestamp: string;
+  stats?: {
+    server?: {
+      wait_time?: number;
+      cpu_load?: number;
+      active_connections?: number;
+    };
+  };
+};
+
 const PORT = 8080;
 const INTERVAL = 10000;
 
@@ -31,14 +44,16 @@ wss.on("connection", (ws) => {
   });
 });
 
-const fetchRegionData = async () => {
-  const results: Record<string, any> = {};
+const fetchRegionData = async (): Promise<
+  Record<string, RegionStatus | { error: string }>
+> => {
+  const results: Record<string, RegionStatus | { error: string }> = {};
 
   await Promise.all(
     regions.map(async (region) => {
       try {
         const response = await fetch(getEndpointUrl(region));
-        const data = await response.json();
+        const data = (await response.json()) as RegionStatus;
         results[region] = data;
       } catch (error) {
         console.error(`Failed to fetch ${region}:`, error);
@@ -50,7 +65,7 @@ const fetchRegionData = async () => {
   return results;
 };
 
-const updateClientsWithStatusData = async () => {
+const updateClientsWithRegionData = async () => {
   const data = await fetchRegionData();
 
   const message = JSON.stringify({ timestamp: Date.now(), data });
@@ -62,4 +77,4 @@ const updateClientsWithStatusData = async () => {
   }
 };
 
-setInterval(updateClientsWithStatusData, INTERVAL);
+setInterval(updateClientsWithRegionData, INTERVAL);
