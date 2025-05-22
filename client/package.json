@@ -11,7 +11,8 @@
     "prepare": "husky",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "launch": "flyctl launch",
-    "deploy": "flyctl deploy"
+    "deploy": "flyctl deploy",
+    "test": "vitest"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
@@ -32,6 +33,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^22.13.9",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
@@ -42,12 +46,14 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
     "husky": "^9.1.7",
+    "jsdom": "^26.1.0",
     "lint-staged": "^15.4.3",
     "prettier": "3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
-    "vite": "^6.2.0"
+    "vite": "^6.2.0",
+    "vitest": "^3.1.4"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
