@@ -8,19 +8,7 @@ import SelectedRegion from "./selected-region";
 import LoadingSpinnerWrapper from "@/components/core/loading-spinner";
 import { EmptyState } from "@/components/empty-state";
 import { connectWebSocket } from "@/lib/websocket";
-
-export type RegionStatus = {
-  status: string;
-  region: string;
-  timestamp: string;
-  stats?: {
-    server?: {
-      wait_time?: number;
-      cpu_load?: number;
-      active_connections?: number;
-    };
-  };
-};
+import { RegionStatus } from "@/types/region-status";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const socket = new WebSocket(`${baseUrl.replace(/^http/, "ws")}/ws`);

@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { RegionStatus } from "@/types/region-status";
 import { Users } from "lucide-react";
-import { RegionStatus } from "./dashboard";
 
 type ConnectionsProps = {
   data: RegionStatus[];

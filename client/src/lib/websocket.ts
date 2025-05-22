@@ -1,4 +1,4 @@
-import { RegionStatus } from "@/components/features/dashboard/dashboard";
+import { RegionStatus } from "@/types/region-status";
 
 type WebSocketHandlers = {
   socket: WebSocket;

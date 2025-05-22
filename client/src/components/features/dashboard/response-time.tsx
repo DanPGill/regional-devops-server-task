@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { RegionStatus } from "@/types/region-status";
 import { CheckCircle, AlertTriangle } from "lucide-react";
-import { RegionStatus } from "./dashboard";
 
 type ResponseTimeProps = {
   data: RegionStatus[];
