@@ -7,16 +7,10 @@ type ConnectionsProps = {
 };
 
 const Connections: React.FC<ConnectionsProps> = ({ data }) => {
-  const totalConnections = data
-    .filter(
-      (
-        r,
-      ): r is RegionStatus & {
-        stats: { server: { active_connections: number } };
-      } => typeof r.stats?.server?.active_connections === "number",
-    )
-    .reduce((acc, region) => acc + region.stats.server.active_connections, 0)
-    .toLocaleString();
+  const totalConnections = data.reduce((acc, region) => {
+    const connections = region.stats?.server?.active_connections;
+    return typeof connections === 'number' ? acc + connections : acc;
+  }, 0).toLocaleString();
 
   return (
     <Card className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
