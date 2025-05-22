@@ -22,3 +22,4 @@ It implements the following:
 
 - This project is not a true monorepo produced with a tool like nx for the sake of time/simplicity
 - Backend doesn't have lint/prettier to save time - see frontend for how this would be implemented
+- More test coverage would be preferable but given time constraints I've added a basic suite to establish a standard
