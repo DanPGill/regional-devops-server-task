@@ -15,3 +15,14 @@ export const getStatusColor = (status: string) => {
       return "#6b7280";
   }
 };
+
+export const getStatusBgColor = (status: string) => {
+  switch (status) {
+    case "ok":
+      return "#d1fae5";
+    case "degraded":
+      return "#fef3c7";
+    default:
+      return "#f3f4f6";
+  }
+};

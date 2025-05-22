@@ -1,6 +1,6 @@
 import { RegionStatus } from "./dashboard";
 import { Cpu, Users, Wifi } from "lucide-react";
-import { getStatusColor } from "@/lib/utils";
+import { getStatusBgColor, getStatusColor } from "@/lib/utils";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 type RegionOverviewProps = {
@@ -14,17 +14,6 @@ const RegionOverview: React.FC<RegionOverviewProps> = ({
   onSelectRegion,
   selectedRegion,
 }) => {
-  const getStatusBgColor = (status: string) => {
-    switch (status) {
-      case "ok":
-        return "#d1fae5";
-      case "degraded":
-        return "#fef3c7";
-      default:
-        return "#f3f4f6";
-    }
-  };
-
   return (
     <Card className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm mb-6">
       <CardHeader>

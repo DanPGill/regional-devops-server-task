@@ -7,6 +7,7 @@ import RegionOverview from "./region-overview";
 import SelectedRegion from "./selected-region";
 import LoadingSpinnerWrapper from "@/components/core/loading-spinner";
 import { EmptyState } from "@/components/empty-state";
+import { connectWebSocket } from "@/lib/websocket";
 
 export type RegionStatus = {
   status: string;
@@ -31,60 +32,14 @@ const Dashboard = () => {
   const [error, setError] = useState<string | null>(null);
   const [connected, setConnected] = useState<boolean>(false);
 
-  const connectWebSocket = () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      socket.onopen = () => {
-        console.log("WebSocket connected");
-        setConnected(true);
-      };
-
-      socket.onmessage = (event) => {
-        try {
-          const message = JSON.parse(event.data);
-          console.log("Received data from server:", message);
-
-          const formattedData: RegionStatus[] = Object.entries(
-            message.data,
-          ).map(([region, data]) => {
-            const results = (data as any)?.results ?? {};
-            return {
-              region,
-              status: results.status ?? "unknown",
-              timestamp: results.timestamp ?? new Date().toISOString(),
-              stats: results.stats ?? {},
-            };
-          });
-
-          setStatusData(formattedData);
-          setLoading(false);
-        } catch (err) {
-          console.error("Error parsing WebSocket message:", err);
-          setError("Failed to parse server message");
-        }
-      };
-
-      socket.onerror = (err) => {
-        console.error("WebSocket error:", err);
-        setError("WebSocket connection error");
-        setLoading(false);
-      };
-
-      socket.onclose = () => {
-        console.log("WebSocket disconnected");
-        setConnected(false);
-      };
-    } catch (err) {
-      console.error("WebSocket connection failed:", err);
-      setError("WebSocket connection failed");
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    connectWebSocket();
+    connectWebSocket({
+      socket,
+      setStatusData,
+      setConnected,
+      setLoading,
+      setError,
+    });
   }, []);
 
   const selectedRegionData =
@@ -107,7 +62,15 @@ const Dashboard = () => {
             </div>
             <div className="flex items-center gap-4">
               <button
-                onClick={connectWebSocket}
+                onClick={() =>
+                  connectWebSocket({
+                    socket,
+                    setStatusData,
+                    setConnected,
+                    setLoading,
+                    setError,
+                  })
+                }
                 disabled={loading}
                 className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
               >
