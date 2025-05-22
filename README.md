@@ -12,6 +12,7 @@ It implements the following:
 - ShadCN for UI components
 - Tailwindcss for styling
 - Docker and flyctl for deployment
+- Vitest for testing
 
 # Instructions
 
