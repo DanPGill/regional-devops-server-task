@@ -17,3 +17,8 @@ It implements the following:
 
 - Install with `pnpm i`
 - Run with `pnpm run dev`
+
+# Limitations
+
+- This project is not a true monorepo produced with a tool like nx for the sake of time/simplicity
+- Backend doesn't have lint/prettier to save time - see frontend for how this would be implemented
